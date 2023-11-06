@@ -1,6 +1,7 @@
 # testtask_ansible_Bulgakov
 
 тестовое задание в Орион
+
 Версия Ansible: ansible [core 2.15.5]
 
 Сведения об операционной системе:
