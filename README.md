@@ -4,12 +4,7 @@
 
 Версия Ansible: ansible [core 2.15.5]
 
-Сведения об операционной системе:
-\begin{enumerate} 
- \itemOperating System: Ubuntu 22.04.3 LTS                
- \itemKernel: Linux 6.2.0-36-generic
-\end{enumerate}
-
+Сведения об операционной системе: Operating System: Ubuntu 22.04.3 LTS; Kernel: Linux 6.2.0-36-generic
 
 роль на Ansible 
  -просит пользователя вставить USB устройство
