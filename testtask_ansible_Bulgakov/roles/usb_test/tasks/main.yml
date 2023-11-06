@@ -1,0 +1,70 @@
+---
+  - name: initial state
+    command: lsusb
+    register: usb_devices
+
+
+  - name: Incert USB
+    pause:
+     prompt: INSERT USB DEVICE AND PRESS ENTER
+
+  - name: new state
+    command: lsusb
+    register: new_usb_devices
+
+
+  - set_fact: #---оставляем только ID и названия устройств
+     ID1: "{{ID1 + [ item| regex_replace('(.*ID)', '')] }}"
+    with_items: "{{ new_usb_devices.stdout_lines }}"
+
+
+  - debug:
+     msg: "New USB devise decected"
+    when: usb_devices.stdout_lines != new_usb_devices.stdout_lines
+
+  - name: Exit if no new USB bevice
+    fail: msg="No new USB devise decected!"
+    when: usb_devices.stdout_lines == new_usb_devices.stdout_lines
+
+  - name: Remove USB
+    pause:
+     prompt: REMOVE USB DEVICE AND PRESS ENTER
+
+  - name: current state
+    command: lsusb
+    register: current_usb_devices
+
+  - debug:
+     msg: "USB devise removed"
+    when: current_usb_devices.stdout_lines == usb_devices.stdout_lines
+
+  - name: Exit if USB bevice not removed
+    fail: msg="USB bevice not removed!"
+    when: current_usb_devices.stdout_lines != usb_devices.stdout_lines
+
+  - name: Incert USB
+    pause:
+     prompt: INSERT USB DEVICE AND PRESS ENTER
+
+  - name: new current state
+    command: lsusb
+    register: new_current_usb_devices
+
+
+  - set_fact:
+     ID2: "{{ID2 + [ item| regex_replace('(.*ID)', '')] }}"
+    with_items: "{{ new_current_usb_devices.stdout_lines }}"
+
+
+  - name: Exit if no new USB bevice
+    fail: msg="No new USB devise decected!"
+    when: new_current_usb_devices.stdout_lines == usb_devices.stdout_lines
+
+  - debug:
+     msg: "Same USB device"
+    when: ID1 == ID2
+
+  - debug:
+     msg: "Different USB device"
+    when: ID1 != ID2
+# tasks file for usb_test

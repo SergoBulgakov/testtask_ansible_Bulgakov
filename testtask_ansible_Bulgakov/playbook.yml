@@ -1,0 +1,6 @@
+---
+- name: test_usb
+  hosts: all
+
+  roles:
+    - usb_test
