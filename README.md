@@ -2,6 +2,7 @@
 
 тестовое задание в Орион
 Версия Ansible: ansible [core 2.15.5]
+
 Сведения об операционной системе:
  -Operating System: Ubuntu 22.04.3 LTS                
  -Kernel: Linux 6.2.0-36-generic
